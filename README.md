@@ -1,87 +1,73 @@
-# The Nature of Code, Spring 2018
+# Machine Learning and Neural Networks
 
-Can we capture the unpredictable evolutionary and emergent properties of nature in software? Can understanding the mathematical principles behind our physical world world help us to create digital worlds? This class focuses on the programming strategies and techniques behind computer simulations of natural systems. We explore topics ranging from basic mathematics and physics concepts to more advanced simulations of complex systems. Subjects covered include physics simulation, trigonometry, self-organization, genetic algorithms, and neural networks. Examples are demonstrated in JavaScript using [p5.js](http://p5js.org). Much of the class time will be dedicated to in-class exercises and self-study as much of the course is [available online through a video series](https://www.youtube.com/user/shiffman/playlists?shelf_id=6&view_as=subscriber&sort=dd&view=50) and [textbook](http://natureofcode.com/book/).
+## Video Tutorials
+* [Full Coding Train Neural Network Playlist](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6aCibgK1PTWWu9by6XFdCfh)
+* [Coding Train XOR Example](https://youtu.be/188B6k_F9jU?list=PLRqwX-V7Uu6aCibgK1PTWWu9by6XFdCfh)
+* [Coding Train Doodle Classifier Example](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6Zs14zKVuTuit6jApJgoYZQ)
+* [3Blue1Brown Neural Network series](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi)
 
-## Info
-- Daniel Shiffman, Tuesdays, 12:10pm-2:40pm
-- [All class dates](http://help.itp.nyu.edu/curriculum/registration/spring-2018-reg-info/spring-2018-class-dates-term-deadlines)
-    - **note first class is rescheduled to Friday, Jan 26, 12:10-2:40pm**
-- [Office Hours](https://itp.nyu.edu/inwiki/Signup/Shiffman)
+## p5.js examples
+* [Simple Perceptron ](https://github.com/shiffman/The-Nature-of-Code-Examples-p5.js/tree/master/chp10_nn/NOC_10_01_Perceptron)
+* [Fully Connected Neural Network (one hidden layer) library and examples](https://github.com/CodingTrain/Toy-Neural-Network-JS)
+* [Animated Network Visualization](https://github.com/shiffman/The-Nature-of-Code-Examples-p5.js/tree/master/chp10_nn/NOC_10_04_NetworkAnimation)
 
-## Mailing List
-* [Nature of Code Google Group](https://groups.google.com/a/itp.nyu.edu/forum/#!forum/natureofcode)
+## ml5 library
+* [ml5 website](https://ml5js.github.io/)
+* [ml5 github](https://github.com/ml5js)
+* [ml5 examples](https://github.com/ml5js/ml5-examples)
 
-# Schedule
+## What is a "Machine Learning"? (From [Andrew Ng's Coursera Course](https://www.coursera.org/learn/machine-learning))
+* "Field of study that gives computers the ability to learn without being explicitly programmed." -- Arthur Samuels (1959). [Self-learning and checkers](https://en.wikipedia.org/wiki/Arthur_Samuel#Computer_checkers_.28draughts.29_development).
+* "A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E." -- Tom Mitchell (1998): [Maching Learning book](http://amzn.to/2nLdRgQ).
+  * Example: classifying images of dogs and cats.
+    * E = Watching you classify images as dogs or cats.
+    * T = Classifying images as dogs or cats.
+    * P = The % of images correctly classified.
 
-## Week 1 - Introduction: Make-Up Date: ***Friday, Jan 26, 12:10 - 2:40pm***
-* [Notes and Examples](week1)
-* [Homework](https://github.com/shiffman/NOC-S18/wiki/Homework-1)
+## Supervised Learning
+> In supervised learning, we are given a data set and already know what our correct output should look like, having the idea that there is a relationship between the input and the output. -- Andrew Ng
+> Supervised Learning is a strategy that involves a "teacher" that trains the learning system. For example, consider facial recognition. The "teacher" shows the network a bunch of faces (the teacher already knows the names associated with each face). The learning system makes its guesses and the teacher provides the answers. The learning system can then compare its answers to the known “correct” ones and make adjustments according to its errors. -- [Nature of Code Chapter 10](http://natureofcode.com/book/chapter-10-neural-networks/):
 
-## Week 2 - Build a Physics Engine, Jan 30
-* [Notes and Examples](week2)
-* [Homework](https://github.com/shiffman/NOC-S18/wiki/Homework-2)
+## Classification and Regression
+* Classification and regression both involve making a "prediction" based on input data.
+* Classification refers to predicting an output with a discrete set of possibilities like a set of categories or labels. For example: "Given an input image, is it a dog or cat?"
+* Regression refers to predicting an "continuous" output (a fancy way of saying number). For example: "Given the number of bedrooms, what is the price of a house?" or "Given an input image of a cat, how much does the cat weigh?"
 
-## Week 3 - Oscillating Motion, Feb  6
-* [Notes and Examples](week3)
-* [Homework](https://github.com/shiffman/NOC-S18/wiki/Homework-3)
+# Neural Networks
 
-## Week 4 - Particle Systems, Feb 13
-* [Notes and Examples](week4)
-* [Homework](https://github.com/shiffman/NOC-S18/wiki/Homework-4)
+## History
+This short list thanks to Andrey Kurenkov's excellent ['Brief' History of Neural Nets and Deep Learning](http://www.andreykurenkov.com/writing/a-brief-history-of-neural-nets-and-deep-learning/)
+* In 1943, Warren S. McCulloch, a neuroscientist, and Walter Pitts, a logician, developed the first conceptual model of an artificial neural network. In their paper, "[A logical calculus of the ideas immanent in nervous activity](https://pdfs.semanticscholar.org/5272/8a99829792c3272043842455f3a110e841b1.pdf),” they describe the concept of a neuron, a single cell living in a network of cells that receives inputs, processes those inputs, and generates an output.
+* Hebb's Rule from [The Organization of Behavior: A Neuropsychological Theory](https://alexa.design/2nyUyJi): "When an axon of cell A is near enough to excite a cell B and repeatedly or persistently takes part in firing it, some growth process or metabolic change takes place in one or both cells such that A's efficiency, as one of the cells firing B, is increased."
+* Invented in 1957 by Frank Rosenblatt at the Cornell Aeronautical Laboratory ([original paper](http://www.ling.upenn.edu/courses/cogs501/Rosenblatt1958.pdf)), a perceptron is the simplest neural network possible: a computational model of a single neuron. A perceptron consists of one or more inputs, a processor, and a single output.
+* In 1969, in their book [Perceptrons](https://mitpress.mit.edu/books/perceptrons) Marvin Minksy and Seymour Papert demonstrate the limitations of perceptrons to solve only "linearly separable" problems.  AI Winter #1!
+* Paul Werbos's 1974 thesis [Beyond Regression: New Tools for Prediction and Analysis in the Behavioral Sciences](https://books.google.com/books/about/Beyond_Regression.html?id=z81XmgEACAAJ) proposes "backpropagation" as a solution to adjusting weights in the hidden layers of a neural network. The technique was popularized in the 1986 paper [Learning representations by back-propagating errors](http://www.iro.umontreal.ca/~vincentp/ift3395/lectures/backprop_old.pdf) by David Rumelhart, Geoffrey Hinton, and Ronald Williams
+* Neural Networks come back with Yann LeCunn's paper [Backpropagation Applied to Handwritten Zip Code Recognition](http://yann.lecun.com/exdb/publis/pdf/lecun-89e.pdf). Here's a [1993 video on convolutional neural networks](https://youtu.be/FwFduRA_L6Q). But AI Winter returns again with the "[vanishing gradient problem](https://en.wikipedia.org/wiki/Vanishing_gradient_problem)."
+* "Deep Learning" thaws the wintr with new methodologies for training: [A fast learning algorithm for deep belief nets ](https://www.cs.toronto.edu/~hinton/absps/fastnc.pdf) by Hinton, Osindero, Teh and raw power with GPUs: [Large-scale Deep Unsupervised Learning using Graphics Processors](http://www.machinelearning.org/archive/icml2009/papers/218.pdf)
 
-## Week 5 - Autonomous Agents, Feb 20
-* [Notes and Examples](week5)
-* [Simulation Project](https://github.com/shiffman/NOC-S18/wiki/Simulation-Project)
+## Online Reading
+* [Neural Networks (Nature of Code Chapter 10)](http://natureofcode.com/book/chapter-10-neural-networks/)
+* [A Quick Introduction to Neural Networks](https://ujjwalkarn.me/2016/08/09/quick-intro-neural-networks/) by Ujjwal Karn
+* [Let’s code a Neural Network from scratch](https://medium.com/typeme/lets-code-a-neural-network-from-scratch-part-1-24f0a30d7d62) by Charles Fried
+* [Rolf van Gelder's Neural Network in Processing](http://cagewebdev.com/wp-content/uploads/2017/01/Neural-Networks-for-Dummies.pdf)
+* [Linear Algebra Cheatsheet](https://medium.com/towards-data-science/linear-algebra-cheat-sheet-for-deep-learning-cd67aba4526c) by Brendan Fortuner
+* [A Step by Step Backpropagation Example](https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/) by Matt Mazur
+* [A 'Brief' History of Neural Nets and Deep Learning](http://www.andreykurenkov.com/writing/a-brief-history-of-neural-nets-and-deep-learning/) by Andrey Kurenkov
 
-## Week 6 - Physics Libraries, Feb 27
-* [Notes and Examples](week6)
-* [Simulation Project](https://github.com/shiffman/NOC-S18/wiki/Simulation-Project)
+## Additional Reading
+* [Make Your Own Neural Network](http://amzn.to/2pgOaT9) by Tariq Rashid
+* [Chapter 22 of The Computational Beauty of Nature](http://amzn.to/2oUYCjT) by Gary Flake
 
-## Week 7 - Simulation Project Presentations, March 6
 
-## No class Tuesday, March 20
+## Additional Processing examples
+* [Nature of Code Chapter 10 Processing examples](https://github.com/shiffman/The-Nature-of-Code-Examples/tree/master/chp10_nn)
+* [Charles Fried's Neural Network in Processing](https://github.com/CharlesFr/ANN_Tutorial)
+* [Another Processing Example](https://github.com/ANyanCatFan/SimpleNN)
 
-## Week 8 - Genetic Algorithms, March 27
-* [Notes and Examples](week8)
-* [Homework](https://github.com/shiffman/NOC-S18/wiki/Homework-5)
+## Python examples
+* [Make Your Own Neural Network ](https://github.com/makeyourownneuralnetwork/makeyourownneuralnetwork/) from Tariq Rashid
+* [Abishek's Tensorflow Example](https://github.com/shekit/machine-learning-demystified/blob/master/week2/NeuralNet.ipynb)
 
-## Week 9 - Neural Networks, April 3
-* [Notes and Examples](week9)
-* [Homework](https://github.com/shiffman/NOC-S18/wiki/Homework-6)
 
-## Week 10 - Neuro-evolution, April 10
-* [Notes and Examples](week10)
-* [Final Project Proposals](https://github.com/shiffman/NOC-S18/wiki/Project-Proposals)
-
-## Week 11/12 - Final Project Proposals
-  * Regular meeting April 17 for [Final Project Proposal presentations](https://github.com/shiffman/NOC-S18/wiki/Project-Proposals)
-  * Individual Final Project Meetings Friday April 20: ***[Sign up here!](https://calendar.google.com/calendar/selfsched?sstoken=UUVJVlVXTmdVWWRYfGRlZmF1bHR8ZDFjMzk2NDBjMjE1YjE4NTBjZTgzMTM0NzYwODcwOWQ)***
-
-## Week 13 - User Testing Workshop, April 24
-* [User Testing Info / Schedule](https://github.com/shiffman/NOC-S18/wiki/User-Testing)
-
-## Week 14 - Final Project Presentations, May 1
-
-## Requirements
-* You are required to attend all class meetings and submit all weekly assignments and a final project.
-* Grading (pass/fail) will be based on a combination of factors:
-  * Attendance, participation in class discussion, and engagement in other students' projects (25%)
-  * Quality of assignments (50%)
-  * Final Project (25%)
-
-## Resources
-* [All course videos](https://www.youtube.com/user/shiffman/playlists?view=50&sort=dd&shelf_id=6) -- If you would like offline access to the videos and/or just prefer to watch them somewhere other than YouTube, let me know.
-* [Nature of Code Kadenze Course](https://www.kadenze.com/courses/the-nature-of-code/info)
-* [Online textbook](http://natureofcode.com/book/)
-* [p5.js code examples](https://github.com/shiffman/The-Nature-of-Code-Examples-p5.js)
-* [Processing (Java) code examples](https://github.com/shiffman/The-Nature-of-Code-Examples)
-* [Other ports](https://github.com/shiffman/The-Nature-of-Code-Examples/blob/master/README.md)
-* [Further Reading](http://natureofcode.com/book/further-reading/)
-* Some assignments and materials based on Mimi Yin's [Nature of Code course](https://github.com/mimiyin/Nature-of-Code-S-16/).
-
-## Related Reading and Watching
-* [Coding Math Video Series](http://www.youtube.com/user/codingmath)
-* [Generative Design with Processing](http://www.amazon.com/gp/product/1616890770/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=1616890770&linkCode=as2&tag=natureofcode-20)
-* [Mathematics and Physics for Programmers](http://www.amazon.com/gp/product/1435457331/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=1435457331&linkCode=as2&tag=learniproces-20)
-* [Computational Beauty of Nature](http://www.amazon.com/gp/product/0262561271/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0262561271&linkCode=as2&tag=natureofcode-20)
-* [Form and Code](http://formandcode.com/)
+## Homework
+* [Assignment 6](https://github.com/shiffman/NOC-S18/wiki/Homework-6)

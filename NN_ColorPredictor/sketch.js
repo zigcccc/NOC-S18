@@ -1,21 +1,18 @@
-// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
-
-// Color Predictor
-// https://youtu.be/KtPpoMThKUs
-
-// Inspired by Jabril's SEFD Science
-// https://youtu.be/KO7W0Qq8yUE
-// https://youtu.be/iN3WAko2rL8
-
 let r, g, b;
 let brain;
+let interations = 0;
+
+let width;
 
 let which = 'black';
+let blackOutput;
+let whiteOutput;
 
-let wButton;
-let bButton;
+let isTraining;
+let humanTraining;
+let trainingRate;
+
+const { log } = console;
 
 function pickColor() {
 	r = random(255);
@@ -25,11 +22,26 @@ function pickColor() {
 }
 
 function setup() {
-	createCanvas(600, 300);
 	noLoop();
+	width = window.innerWidth;
+	createCanvas(width, 300);
+	trainingRate = createSlider(1, 100, 25);
+	isTraining = createCheckbox("Train ColorPredictors's brain");
+	humanTraining = createCheckbox("Train ColorPredictors's with users inputs");
+	// Number of inputs, number of neurons in hidden layer, number of outputs
 	brain = new NeuralNetwork(3, 3, 2);
-	console.log('Training color predictor...');
-	for (let i = 0; i < 10000; i++) {
+	pickColor();
+}
+
+function trainColorPredictor() {
+	console.log(
+		'Training color predictor with rate ' +
+			trainingRate.value() +
+			', interation ' +
+			interations
+	);
+	for (let i = 0; i < trainingRate.value(); i++) {
+		interations++;
 		let r = random(255);
 		let g = random(255);
 		let b = random(255);
@@ -37,37 +49,44 @@ function setup() {
 		let inputs = [r / 255, g / 255, b / 255];
 		brain.train(inputs, targets);
 	}
+}
 
-	pickColor();
+function trainWithHumanInput() {
+	let targets;
+	if (mouseX > width / 2) {
+		targets = [0, 1];
+	} else {
+		targets = [1, 0];
+	}
+	let inputs = [r / 255, g / 255, b / 255];
+
+	brain.train(inputs, targets);
+	log('I captured your input');
 }
 
 function mousePressed() {
-	// let targets;
-	// if (mouseX > width / 2) {
-	// 	targets = [0, 1];
-	// } else {
-	// 	targets = [1, 0];
-	// }
-	// let inputs = [r / 255, g / 255, b / 255];
+	if (mouseX > width || mouseY > height) {
+		return;
+	}
 
-	// brain.train(inputs, targets);
-
+	if (humanTraining.checked()) {
+		trainWithHumanInput();
+	}
 	pickColor();
 }
 
 function colorPredictor(r, g, b) {
-	console.log(floor(r + g + b));
 	let inputs = [r / 255, g / 255, b / 255];
 	let outputs = brain.predict(inputs);
-	console.table(outputs);
-
-	if (outputs[0] > outputs[1]) {
+	blackOutput = outputs[0];
+	whiteOutput = outputs[1];
+	if (blackOutput > whiteOutput) {
 		return 'black';
 	} else {
 		return 'white';
 	}
 
-	// if (r + g + b > 300) {
+	// if (r + g + b > * 3 / 2) {
 	//   return "black";
 	// } else {
 	//   return "white";
@@ -82,26 +101,50 @@ function trainColor(r, g, b) {
 	}
 }
 
-function draw() {
+function windowResized() {
+	width = window.innerWidth;
+	resizeCanvas(width, 300);
+}
+
+function setupCanvas() {
 	background(r, g, b);
 	strokeWeight(4);
 	stroke(0);
 	line(width / 2, 0, width / 2, height);
-
 	textSize(64);
 	noStroke();
 	fill(0);
 	textAlign(CENTER, CENTER);
-	text('black', 150, 100);
+	text('black', width / 4, 100);
 	fill(255);
-	text('white', 450, 100);
+	text('white', width / (1 + 1 / 3), 100);
+}
 
-	let which = colorPredictor(r, g, b);
-	if (which === 'black') {
-		fill(0);
-		ellipse(150, 200, 60);
+function draw() {
+	isTraining.changed(() => {
+		if (isTraining.checked()) {
+			loop();
+		} else {
+			noLoop();
+		}
+	});
+	setupCanvas();
+	if (isTraining.checked()) {
+		trainColorPredictor();
 	} else {
-		fill(255);
-		ellipse(450, 200, 60);
+		let which = colorPredictor(r, g, b);
+		if (which === 'black') {
+			fill(0);
+			log(
+				`I am ${Math.floor(blackOutput * 100)}% sure this is the correct choice`
+			);
+			ellipse(width / 4, 200, 60);
+		} else {
+			fill(255);
+			log(
+				`I am ${Math.floor(whiteOutput * 100)}% sure this is the correct choice`
+			);
+			ellipse(width / (1 + 1 / 3), 200, 60);
+		}
 	}
 }
